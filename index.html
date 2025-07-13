@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo Web Profesional | Soluciones Digitales a Medida</title>
+    <style>
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Estilos generales */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #3498db;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Header */
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero section */
+        #hero {
+            padding-top: 120px;
+            height: 100vh;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 40px;
+        }
+        
+        .hero-text h1 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 3rem;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: right;
+        }
+        
+        .hero-image img {
+            border-radius: 10px;
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Servicios */
+        #servicios {
+            background-color: white;
+        }
+        
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .servicio-card {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .servicio-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .servicio-card i {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+        
+        .servicio-card h3 {
+            font-size: 1.5rem;
+        }
+        
+        /* Proyectos */
+        #proyectos {
+            background-color: #f5f7fa;
+        }
+        
+        .proyectos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .proyecto-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .proyecto-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .proyecto-img img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .proyecto-info {
+            padding: 20px;
+        }
+        
+        .proyecto-info h3 {
+            margin-bottom: 10px;
+        }
+        
+        .proyecto-info p {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .proyecto-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tag {
+            background: #ecf0f1;
+            color: #7f8c8d;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        /* Métodos de pago */
+.metodos-pago {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.metodo-pago {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 160px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.metodo-pago:hover {
+    transform: translateY(-5px);
+}
+
+.metodo-pago img {
+    width: 70px;
+    height: auto;
+    margin-bottom: 10px;
+    object-fit: contain;
+}
+
+.metodo-pago span {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.95rem;
+}
+
+        
+        /* Formularios */
+        #contacto {
+            background-color: #f5f7fa;
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 50px auto 0;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-row {
+            display: flex;
+            margin-bottom: 25px;
+            gap: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            text-align: center;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-col p {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #3498db;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #2c3e50;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 40px;
+                text-align: center;
+            }
+            
+            .hero-text p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-image {
+                text-align: center;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Techify</a>
+                <button class="mobile-menu-btn" id="menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#hero">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#pagos">Métodos de pago</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Soluciones Web Profesionales a Tu Medida</h1>
+                    <p>Desarrollo sistemas web personalizados que potencian tu negocio o institución educativa, tienda virtual, entre otros.</p>
+                    <a href="#contacto" class="btn">Contrátame</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4542f7fd-0b5d-451b-aaea-8c450769ab38.png" alt="Desarrollador web trabajando en un moderno espacio de oficina con múltiples pantallas mostrando código" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios">
+        <div class="container">
+            <h2>Mis Servicios</h2>
+            <p class="text-center">Ofrezco soluciones completas para tus necesidades digitales</p>
+            
+            <div class="servicios-grid">
+                <div class="servicio-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Desarrollo Web Personalizado</h3>
+                    <p>Sistemas y aplicaciones web desarrollados específicamente para resolver tus desafíos únicos.</p>
+                </div>
+                
+                <div class="servicio-card">
+                    <i class="fas fa-school"></i>
+                    <h3>Sistemas Escolares</h3>
+                    <p>Plataformas completas para gestión académica, calificaciones, asistencia y comunicación.</p>
+                </div>
+                
+                <div class="servicio-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Software Empresarial</h3>
+                    <p>Sistemas de gestión para inventario, ventas, contabilidad y RRHH diseñados para PYMEs.</p>
+                </div>
+                
+                <div class="servicio-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Diseño Responsivo</h3>
+                    <p>Todos mis proyectos se adaptan perfectamente a cualquier dispositivo móvil o escritorio.</p>
+                </div>
+                
+                <div class="servicio-card">
+                    <i class="fas fa-database"></i>
+                    <h3>Integraciones</h3>
+                    <p>Conexión con APIs externas, pasarelas de pago y otros sistemas existentes en tu empresa.</p>
+                </div>
+                
+                <div class="servicio-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>Soporte Continuo</h3>
+                    <p>Mantenimiento, actualizaciones y soporte técnico después de la implementación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos realizados -->
+    <section id="proyectos">
+        <div class="container">
+            <h2>Proyectos Destacados</h2>
+            <p class="text-center">Algunos de los sistemas completos que he desarrollado para clientes</p>
+            
+            <div class="proyectos-grid">
+                <!-- Sistema Escolar -->
+                <div class="proyecto-card">
+                    <div class="proyecto-img">
+                        <img src="escolar.png" alt="Captura del sistema escolar mostrando el panel de administración" />
+                    </div>
+                    <div class="proyecto-info">
+                        <h3>Sistema Escolar Integral</h3>
+                        <p>Plataforma completa para gestión académica que incluye módulos para docentes, estudiantes y padres de familia.</p>
+                        <div class="proyecto-tags">
+                            <span class="tag">PHP</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                        <a href="#contacto" class="btn" style="width: 100%; margin-top: 20px;">Solicitar similar</a>
+                    </div>
+                </div>
+                
+                <!-- Gestión Empresarial -->
+                <div class="proyecto-card">
+                    <div class="proyecto-img">
+                        <img src="empresa.png" alt="Pantalla principal del sistema de gestión empresarial" />
+                    </div>
+                    <div class="proyecto-info">
+                        <h3>Sistema de Gestión Empresarial</h3>
+                        <p>ERP completo para pequeñas y medianas empresas con módulos de inventario, ventas, contabilidad y RRHH.</p>
+                        <div class="proyecto-tags">
+                            <span class="tag">PHP</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                        <a href="#contacto" class="btn" style="width: 100%; margin-top: 20px;">Solicitar similar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Métodos de pago -->
+<section id="pagos">
+    <div class="container">
+        <h2>Métodos de Pago</h2>
+        <p class="text-center">Acepto diversas formas de pago para tu comodidad</p>
+        
+        <div class="metodos-pago">
+            <div class="metodo-pago">
+                <img src="visa.jpg" alt="Logo Visa para pagos con tarjeta" />
+                <span>Tarjeta Visa</span>
+            </div>
+            <div class="metodo-pago">
+                <img src="paypal.jpg" alt="Logo PayPal para pagos digitales" />
+                <span>PayPal</span>
+            </div>
+            <div class="metodo-pago">
+                <img src="yappy.png" alt="Logo Yappy Panamá" />
+                <span>Yappy (Panamá)</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+    
+
+    <!-- Contacto -->
+    <!-- Contacto -->
+<!-- Contacto -->
+<section id="contacto">
+    <div class="container">
+        <h2>Contacto</h2>
+        <p class="text-center">¿Tienes preguntas o quieres discutir un proyecto? Escríbeme</p>
+
+        <div class="form-container">
+            <form id="contact-form" action="https://formsubmit.co/hamedp1103@gmail.com" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://tusitio.com/gracias.html">
+
+                <div class="form-group">
+                    <label for="contact-name">Nombre</label>
+                    <input type="text" id="contact-name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-email">Correo electrónico</label>
+                    <input type="email" id="contact-email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="project-type">Tipo de proyecto</label>
+                    <select id="project-type" name="tipo_proyecto" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="tienda_virtual">Tienda Virtual</option>
+                        <option value="gestion_empresa">Gestión de Empresa</option>
+                        <option value="gestion_estudiantil">Gestión Estudiantil</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="otro-proyecto-group" style="display: none;">
+                    <label for="otro-proyecto">Describa el tipo de proyecto</label>
+                    <input type="text" id="otro-proyecto" name="otro_proyecto">
+                </div>
+
+                <div class="form-group">
+                    <label for="metodo-pago">Método de pago</label>
+                    <select id="metodo-pago" name="metodo_pago" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="visa">Visa</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="yappy">Yappy (Panamá)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="presupuesto">Presupuesto estimado (USD)</label>
+                    <input type="number" id="presupuesto" name="presupuesto" min="100" step="50" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-subject">Asunto</label>
+                    <input type="text" id="contact-subject" name="subject">
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-message">Mensaje</label>
+                    <textarea id="contact-message" name="message" required></textarea>
+                </div>
+
+                <div class="form-submit">
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Sobre Mí</h3>
+                    <p>Desarrollador web especializado en crear sistemas a medida para educación y negocios. Trabajo con PHP, CSS, JavaScript, MySQL, HTML.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#hero">Inicio</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#proyectos">Proyectos</a></li>
+                        <li><a href="#pagos">Métodos de pago</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Información de Contacto</h3>
+                    <p><i class="fas fa-envelope"></i> hamedp1103@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +507 69237797</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Panamá, Panamá</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Techify. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const navLinks = document.getElementById('nav-links');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if(this.getAttribute('href') !== '#') {
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Close mobile menu if open
+                if(navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        
+        // Form validation
+        const paymentForm = document.getElementById('payment-form');
+        const contactForm = document.getElementById('contact-form');
+        
+        if(paymentForm) {
+            paymentForm.addEventListener('submit', function(e) {
+                const budget = document.getElementById('presupuesto').value;
+                if(budget && budget < 100) {
+                    alert('El presupuesto mínimo para proyectos es de $100 USD');
+                    e.preventDefault();
+                }
+            });
+        }
+        
+        // Handle payment method selection
+        const paymentMethod = document.getElementById('metodo-pago');
+        const paymentFields = document.getElementById('paymentFields');
+        const creditCardFields = document.getElementById('creditCardFields');
+        const digitalPaymentFields = document.getElementById('digitalPaymentFields');
+
+        paymentMethod.addEventListener('change', function() {
+            const value = this.value;
+            paymentFields.style.display = value ? 'block' : 'none';
+            
+            if (value === 'visa') {
+                creditCardFields.style.display = 'block';
+                digitalPaymentFields.style.display = 'none';
+            } else if (value === 'paypal' || value === 'yappy') {
+                creditCardFields.style.display = 'none';
+                digitalPaymentFields.style.display = 'block';
+            }
+        });
+
+        if(contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                const email = document.getElementById('contact-email').value;
+                if(!email.includes('@')) {
+                    alert('Por favor ingrese un correo electrónico válido');
+                    e.preventDefault();
+                }
+            });
+        }
+        // Mostrar campo "Otro" si elige esa opción
+document.getElementById('project-type').addEventListener('change', function () {
+    const otroGroup = document.getElementById('otro-proyecto-group');
+    if (this.value === 'otro') {
+        otroGroup.style.display = 'block';
+        document.getElementById('otro-proyecto').required = true;
+    } else {
+        otroGroup.style.display = 'none';
+        document.getElementById('otro-proyecto').required = false;
+    }
+});
+
+// Validación del presupuesto mínimo
+document.getElementById('contact-form').addEventListener('submit', function (e) {
+    const presupuesto = parseFloat(document.getElementById('presupuesto').value);
+    if (presupuesto < 100) {
+        alert('El presupuesto mínimo es de $100 USD.');
+        e.preventDefault();
+    }
+});
+
+    </script>
+</body>
+</html>
